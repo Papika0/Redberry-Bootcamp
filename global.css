@@ -9,3 +9,31 @@
   font-family: "Helvetica Neue";
   box-sizing: border-box;
 }
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.back-arrow {
+  position: absolute;
+  left: 3rem;
+  top: 2.8rem;
+  width: 40px;
+  height: 40px;
+  padding: 13px;
+  border-radius: 50%;
+  background: #ffffff;
+}
+
+input {
+  height: 3rem;
+  background: #ffffff;
+  border: 1px solid #bcbcbc;
+  border-radius: 4px;
+  padding-left: 1rem;
+}
+
+input:hover {
+  border: 2px solid #bcbcbc;
+}

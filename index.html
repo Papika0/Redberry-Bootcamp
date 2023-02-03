@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="./assets/logo/icon.svg" type="image/icon type" />
+    <link rel="icon" href="./assets/icon/icon.svg" type="image/icon type" />
     <link rel="stylesheet" href="global.css" />
     <link rel="stylesheet" href="index.css" />
     <title>Employee CV Maker</title>
@@ -18,6 +18,16 @@
       src="./assets/images/background-first-logo.svg"
       class="background-logo"
     />
-    <button class="btn">რეზიუმეს დამატება</button>
+    <button class="btn" id="redirect">რეზიუმეს დამატება</button>
+    <script>
+      document
+        .getElementById("redirect")
+        .addEventListener("click", function () {
+          document.body.classList.add("fade-out");
+          setTimeout(function () {
+            window.location.href = "src/personal-page/personal.html";
+          }, 1100);
+        });
+    </script>
   </body>
 </html>

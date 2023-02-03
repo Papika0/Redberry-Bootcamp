@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+  height: 100vh;
+}
+.form-side {
+  width: 57%;
+  background-color: #f9f9f9;
+}
+.info-header {
+  width: 80%;
+  margin: 3.15rem auto 0;
+}
+.info-header p {
+  display: inline-block;
+  font-weight: 700;
+  font-size: 24px;
+  color: #1a1a1a;
+  margin-bottom: 0.7rem;
+  letter-spacing: 0.5px;
+}
+.info-header p:nth-child(2) {
+  float: right;
+  font-weight: 500;
+  font-size: 20px;
+}
+.form {
+  width: 80%;
+  margin: 2.5rem auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10%;
+  height: 80%;
+}
+
+.name,
+.lastname {
+  display: inline-block;
+  width: 49%;
+}
