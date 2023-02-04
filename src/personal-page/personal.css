@@ -44,6 +44,23 @@
 .name,
 .lastname {
   width: 46%;
+  position: relative;
+}
+.person-email,
+.person-phone {
+  position: relative;
+}
+.icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.icon img {
+  width: 20px;
+  height: 20px;
 }
 
 .person-photo {

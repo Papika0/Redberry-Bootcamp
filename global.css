@@ -41,6 +41,10 @@ input:hover {
   border: 2px solid #bcbcbc;
 }
 
+input:focus {
+  outline: none;
+}
+
 button {
   border-radius: 4px;
   border: none;
@@ -90,4 +94,16 @@ p {
   margin-right: 7rem;
   padding: 0.9rem 2.2rem;
   font-size: 16px;
+}
+
+.valid {
+  border: 1px solid #98e37e;
+}
+
+.invalid {
+  border: 1px solid #ef5050;
+}
+
+.invalid-label {
+  color: #ef5050;
 }

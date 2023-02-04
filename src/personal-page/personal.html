@@ -12,7 +12,7 @@
   <body>
     <div class="container">
       <div class="form-side">
-        <a href="../../index.html"
+        <a href="../../index.html" onclick="localStorage.clear()"
           ><img src="../../assets/images/back-arrow.svg" class="back-arrow"
         /></a>
         <div class="info-header">
@@ -45,6 +45,7 @@
             <p>პირადი ფოტოს ატვირთვა</p>
             <button
               class="upload-button"
+              id="upload-button"
               onclick="document.getElementById('photoInput').click()"
             >
               ატვირთვა
@@ -69,21 +70,22 @@
           </div>
 
           <div class="person-phone">
-            <label for="Lastname">მობილურის ნომერი</label> <br />
+            <label for="Phone">მობილურის ნომერი</label> <br />
             <input
               type="text"
-              name="Lastname"
-              id="Lastname"
+              name="number"
+              id="Phone"
               placeholder="+995 551 12 34 56"
             />
             <h5>უნდა აკმაყოფილებდეს ქართული მობილურის ნომრის ფორმატს</h5>
           </div>
         </div>
-        <button class="page-btn next-btn">შემდეგი</button>
+        <button class="page-btn next-btn" id="next-btn">შემდეგი</button>
       </div>
       <div class="cv-side">
         <img src="../../assets/icon/icon.svg" class="redberry-icon" />
       </div>
     </div>
+    <script src="validation.js"></script>
   </body>
 </html>
