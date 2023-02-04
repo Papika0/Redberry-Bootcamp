@@ -26,14 +26,11 @@ body {
 .btn {
   display: flex;
   position: relative;
-  align-items: center;
   padding: 1.1rem 7.8rem;
   margin: 24.5rem auto 0;
   background: #1a1a1a;
   font-size: 20px;
-  color: white;
   border-radius: 8px;
-  cursor: pointer;
   z-index: 1;
   transition: all 0.3s ease;
 }
