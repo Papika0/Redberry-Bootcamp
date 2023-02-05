@@ -148,3 +148,12 @@ p {
 .Phone-output {
   margin-top: 0.6rem;
 }
+
+.displayedImage {
+  position: absolute;
+  width: 246px;
+  height: 246px;
+  border-radius: 133px;
+  margin-left: 31rem;
+  margin-top: 3rem;
+}

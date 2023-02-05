@@ -1,7 +1,6 @@
 import { name, lastName, email, phoneNumber, aboutMe } from "./validation.js";
 
 const photoInput = document.getElementById("photoInput");
-const displayedImage = document.getElementById("displayedImage");
 
 export function setItem(key, value) {
   localStorage.setItem(key, value);
@@ -11,34 +10,45 @@ export function getItem(key) {
   return localStorage.getItem(key);
 }
 
+function createHTML() {
+  let html = `
+            <div class="name-lstname-div">
+          <p id="Name-output" class="Name-output"></p>
+          <p id="Lastname-output" class="Lastname-output"></p>
+        </div>
+        <img src="" id="displayedImage" class="displayedImage" />
+        <div class="email-div">
+          <img src="" id="email-logo" />
+          <p id="Email-output" class="Email-output"></p>
+        </div>
+        <div class="phone-div">
+          <img src="" id="phone-logo" />
+          <p id="Phone-output" class="Phone-output"></p>
+        </div>
+        <div class="about-me-div">
+          <h1 id="about-me">ჩემ შესახებ</h1>
+          <p id="AboutMe-output" class="AboutMe-output"></p>
+        </div>
+        <img src="../../assets/icon/icon.svg" class="redberry-icon" />
+  `;
+  output.innerHTML = html;
+}
+
 export function updateOutput(input, value) {
-  if (!document.getElementById(input.id + "-output")) {
-    const p = document.createElement("p");
-    p.className = input.id + "-output";
-    p.id = input.id + "-output";
-    p.textContent = value;
-    output.appendChild(p);
-  } else {
-    document.getElementById(input.id + "-output").textContent = value;
-  }
+  document.getElementById(input.id + "-output").textContent =
+    input === phoneNumber ? formatPhoneNumber(value) : value;
 }
 
-function updatePhoto() {
-  if (!document.getElementById("displayedImage")) {
-    const img = document.createElement("img");
-    img.className = "displayedImage";
-    img.id = "displayedImage";
-    img.src = getItem("Photo");
-    output.appendChild(img);
-  } else {
-    document.getElementById("displayedImage").src = getItem("Photo");
-  }
-}
-
-function localOutputCheck(input) {
-  if (getItem(input.id)) {
-    updateOutput(input, getItem(input.id));
-  }
+function formatPhoneNumber(value) {
+  return (
+    value.slice(0, 4) +
+    " " +
+    value.slice(4, 7) +
+    " " +
+    value.slice(7, 10) +
+    " " +
+    value.slice(10, 13)
+  );
 }
 
 photoInput.addEventListener("change", function () {
@@ -53,6 +63,12 @@ photoInput.addEventListener("change", function () {
   reader.readAsDataURL(file);
 });
 
+function localOutputCheck(input) {
+  if (getItem(input.id)) {
+    updateOutput(input, getItem(input.id));
+  }
+}
+
 function getAllOutputs() {
   localOutputCheck(name);
   localOutputCheck(lastName);
@@ -61,7 +77,12 @@ function getAllOutputs() {
   localOutputCheck(aboutMe);
 }
 
+function updatePhoto() {
+  document.getElementById("displayedImage").src = getItem("Photo");
+}
+
 window.addEventListener("load", function () {
+  createHTML();
   name.value = getItem("Name");
   lastName.value = getItem("Lastname");
   email.value = getItem("Email");
