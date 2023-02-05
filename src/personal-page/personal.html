@@ -55,7 +55,7 @@
 
           <div class="person-info">
             <label for="info">ჩემ შესახებ (არასავალდებულო)</label><br />
-            <textarea name="info"></textarea>
+            <textarea name="info" id="AboutMe"></textarea>
           </div>
 
           <div class="person-email">
@@ -82,10 +82,11 @@
         </div>
         <button class="page-btn next-btn" id="next-btn">შემდეგი</button>
       </div>
-      <div class="cv-side">
+      <div class="cv-side" id="output">
         <img src="../../assets/icon/icon.svg" class="redberry-icon" />
       </div>
     </div>
-    <script src="validation.js"></script>
+    <script type="module" src="validation.js"></script>
+    <script type="module" src="localStorage.js"></script>
   </body>
 </html>

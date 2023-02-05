@@ -1,16 +1,20 @@
+import { setItem, updateOutput, getItem } from "./localstorage.js";
+
 const name = document.getElementById("Name");
 const lastName = document.getElementById("Lastname");
 const photo = document.getElementById("photoInput");
 const email = document.getElementById("Email");
 const phoneNumber = document.getElementById("Phone");
+const aboutMe = document.getElementById("AboutMe");
 
 const georgianRegex = /^[ა-ჰ]+$/;
 const emailRegex = /^\w+@redberry.ge$/;
-const phoneRegex = /^(\+995)?\d{9}$/;
+const phoneRegex = /^(\+995)\d{9}$/;
 
 const uploadButton = document.getElementById("upload-button");
 const nextBtn = document.getElementById("next-btn");
-const photoUpload = document.getElementById("photoInput");
+
+export { name, lastName, email, phoneNumber, photo, aboutMe };
 
 function createSuccessIcon(id) {
   const iconContainer = document.createElement("div");
@@ -57,7 +61,10 @@ function inputValidation(input, regex) {
 function validateInput(input, regex) {
   input.addEventListener("keyup", function (e) {
     setItem(input.id, e.target.value);
-    inputValidation(input, regex);
+    if (regex) {
+      inputValidation(input, regex);
+    }
+    updateOutput(input, e.target.value);
   });
 }
 
@@ -65,6 +72,8 @@ validateInput(name, georgianRegex);
 validateInput(lastName, georgianRegex);
 validateInput(email, emailRegex);
 validateInput(phoneNumber, phoneRegex);
+validateInput(photo);
+validateInput(aboutMe);
 
 function uploadErrorIcon() {
   const svg = document.createElement("img");
@@ -76,8 +85,8 @@ function uploadErrorIcon() {
 
 function validatePhoto() {
   if (!photo.value && !document.getElementById("upload-error-icon")) {
-    uploadErrorIcon();
-  } else if (photo.value && document.getElementById("upload-error-icon")) {
+    if (!getItem("Photo")) uploadErrorIcon();
+  } else if (photo.value || getItem("Photo")) {
     document.getElementById("upload-error-icon").remove();
   }
 }
@@ -92,20 +101,4 @@ function onSubmitValidation() {
 
 nextBtn.addEventListener("click", function () {
   onSubmitValidation();
-});
-
-function setItem(key, value) {
-  localStorage.setItem(key, value);
-}
-
-photoUpload.addEventListener("change", function () {
-  localStorage.setItem("Photo", photoUpload.files[0]);
-});
-
-window.addEventListener("load", function () {
-  name.value = localStorage.getItem("Name");
-  lastName.value = localStorage.getItem("Lastname");
-  email.value = localStorage.getItem("Email");
-  phoneNumber.value = localStorage.getItem("Phone");
-  photo.files[0] = localStorage.getItem("Photo");
 });

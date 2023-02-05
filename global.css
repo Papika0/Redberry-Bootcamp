@@ -107,3 +107,44 @@ p {
 .invalid-label {
   color: #ef5050;
 }
+
+.redberry-icon {
+  position: absolute;
+  width: 42px;
+  height: 42px;
+  margin-top: 52%;
+  margin-left: 5rem;
+}
+
+.Name-output,
+.Lastname-output {
+  display: inline-block;
+  font-weight: 700;
+  font-size: 34px;
+  color: #f93b1d;
+  margin-top: 4.25rem;
+}
+
+.Name-output {
+  margin-left: 5rem;
+}
+
+.Lastname-output {
+  margin-left: 1.25rem;
+}
+
+.Email-output,
+.Phone-output {
+  font-weight: 400;
+  font-size: 18px;
+  color: #1a1a1a;
+  margin-left: 6.9rem;
+}
+
+.Email-output {
+  margin-top: 1.2rem;
+}
+
+.Phone-output {
+  margin-top: 0.6rem;
+}
