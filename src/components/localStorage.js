@@ -39,7 +39,6 @@ function localOutputCheck(input) {
 }
 
 function showHiddenFields(input, value) {
-  console.log(input);
   if (input == "Email") {
     document.getElementById("email-icon").style.visibility = "visible";
   } else if (input == "Phone") {
@@ -48,6 +47,16 @@ function showHiddenFields(input, value) {
     document.getElementById("aboutMeDiv").style.visibility = "visible";
   }
   if (value == "" && input == "AboutMe") {
+    document.getElementById("aboutMeDiv").style.visibility = "hidden";
+  }
+}
+
+function hideHiddenFields(input) {
+  if (input == "Email") {
+    document.getElementById("email-icon").style.visibility = "hidden";
+  } else if (input == "Phone") {
+    document.getElementById("phone-icon").style.visibility = "hidden";
+  } else if (input == "AboutMe") {
     document.getElementById("aboutMeDiv").style.visibility = "hidden";
   }
 }
@@ -61,4 +70,12 @@ function getAllOutputs() {
   updatePhoto();
 }
 
-export { setItem, getItem, getAllOutputs, showHiddenFields, updateOutput };
+export {
+  setItem,
+  getItem,
+  getAllOutputs,
+  showHiddenFields,
+  updateOutput,
+  updatePhoto,
+  hideHiddenFields,
+};

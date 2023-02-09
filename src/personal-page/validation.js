@@ -3,6 +3,7 @@ import {
   getItem,
   updateOutput,
   showHiddenFields,
+  hideHiddenFields,
 } from "../components/localStorage.js";
 import {
   createErrorIcon,
@@ -65,8 +66,11 @@ function validateInput(input, regex) {
     if (regex) {
       inputValidation(input, regex);
     }
-    updateOutput(input, e.target.value);
-    showHiddenFields(input, e.target.value);
+    updateOutput(input.id, e.target.value);
+    showHiddenFields(input.id, e.target.value);
+    if (!e.target.value.length) {
+      hideHiddenFields(input.id);
+    }
   });
 }
 

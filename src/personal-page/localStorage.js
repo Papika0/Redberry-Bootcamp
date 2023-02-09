@@ -1,6 +1,11 @@
 import { name, lastName, email, phoneNumber, aboutMe } from "./validation.js";
 import { createHTML } from "../components/cvHtmlCreate.js";
-import { setItem, getItem, getAllOutputs } from "../components/localStorage.js";
+import {
+  setItem,
+  getItem,
+  getAllOutputs,
+  updatePhoto,
+} from "../components/localStorage.js";
 
 const photoInput = document.getElementById("photoInput");
 
