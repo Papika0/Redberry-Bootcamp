@@ -1,4 +1,9 @@
-import { setItem, updateOutput, getItem } from "./localstorage.js";
+import {
+  setItem,
+  updateOutput,
+  getItem,
+  showHiddenFields,
+} from "./localstorage.js";
 
 const name = document.getElementById("Name");
 const lastName = document.getElementById("Lastname");
@@ -65,6 +70,7 @@ function validateInput(input, regex) {
       inputValidation(input, regex);
     }
     updateOutput(input, e.target.value);
+    showHiddenFields(input, e.target.value);
   });
 }
 
@@ -101,4 +107,8 @@ function onSubmitValidation() {
 
 nextBtn.addEventListener("click", function () {
   onSubmitValidation();
+  const invalidElements = document.querySelectorAll(".invalid");
+  if (invalidElements.length === 0) {
+    window.location.href = "./education.html";
+  }
 });

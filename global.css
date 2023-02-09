@@ -156,6 +156,7 @@ p {
 }
 
 .displayedImage {
+  visibility: hidden;
   position: absolute;
   width: 246px;
   height: 246px;
@@ -165,7 +166,11 @@ p {
 }
 
 .about-me-div {
+  visibility: hidden;
   margin-top: 2.1rem;
+  display: block;
+  width: 60%;
+  word-wrap: break-word;
 }
 
 #about-me {
@@ -174,8 +179,12 @@ p {
   color: #f93b1d;
 }
 
-.AboutMe-output {
-  width: 60%;
+.about-me-div p {
   margin-top: 0.9rem;
   font-size: 16px;
+}
+
+#email-icon,
+#phone-icon {
+  visibility: hidden;
 }

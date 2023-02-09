@@ -25,7 +25,7 @@ function createHTML() {
           <img src="../../assets/images/phone-icon.svg" id="phone-icon" />
           <p id="Phone-output" class="Phone-output"></p>
         </div>
-        <div class="about-me-div">
+        <div class="about-me-div" id="aboutMeDiv">
           <h1 id="about-me">ჩემ შესახებ</h1>
           <p id="AboutMe-output" class="AboutMe-output"></p>
         </div>
@@ -54,6 +54,7 @@ function formatPhoneNumber(value) {
 photoInput.addEventListener("change", function () {
   const file = photoInput.files[0];
   const reader = new FileReader();
+  document.getElementById("displayedImage").style.visibility = "visible";
 
   reader.addEventListener("load", function () {
     setItem("Photo", reader.result);
@@ -66,6 +67,20 @@ photoInput.addEventListener("change", function () {
 function localOutputCheck(input) {
   if (getItem(input.id)) {
     updateOutput(input, getItem(input.id));
+    showHiddenFields(input);
+  }
+}
+
+export function showHiddenFields(input, value) {
+  if (input == email) {
+    document.getElementById("email-icon").style.visibility = "visible";
+  } else if (input == phoneNumber) {
+    document.getElementById("phone-icon").style.visibility = "visible";
+  } else if (input == aboutMe) {
+    document.getElementById("aboutMeDiv").style.visibility = "visible";
+  }
+  if (value == "" && input == aboutMe) {
+    document.getElementById("aboutMeDiv").style.visibility = "hidden";
   }
 }
 
@@ -90,6 +105,7 @@ window.addEventListener("load", function () {
   aboutMe.value = getItem("AboutMe");
   if (getItem("Photo")) {
     updatePhoto();
+    document.getElementById("displayedImage").style.visibility = "visible";
   }
   getAllOutputs();
 });
