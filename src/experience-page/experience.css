@@ -1,0 +1,25 @@
+.dates {
+  display: flex;
+  gap: 3.8rem;
+}
+
+.start-date,
+.end-date {
+  width: 46%;
+  position: relative;
+}
+
+.form {
+  gap: 5%;
+}
+
+textarea {
+  height: 7rem;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  width: 20px;
+  height: 20px;
+  filter: invert(0.3);
+  margin-right: 0.5rem;
+}

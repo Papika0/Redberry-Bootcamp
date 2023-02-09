@@ -20,8 +20,55 @@
           <p>2/3</p>
           <hr class="header-line" />
         </div>
+        <div class="form">
+          <div class="position">
+            <label for="position">თანამდებობა</label> <br />
+            <input
+              type="text"
+              name="position"
+              id="Position"
+              placeholder="დეველოპერი, დიზაინერი, ა.შ."
+            />
+            <h5>მინიმუმ 2 სიმბოლო</h5>
+          </div>
 
-        <div class="form"></div>
+          <div class="company">
+            <label for="company">დამსაქმებელი</label> <br />
+            <input
+              type="text"
+              name="company"
+              id="Company"
+              placeholder="დამსაქმებელი"
+            />
+            <h5>მინიმუმ 2 სიმბოლო</h5>
+          </div>
+
+          <div class="dates">
+            <div class="start-date">
+              <label for="start-date">დაწყების რიცხვი</label> <br />
+              <input type="date" name="start-date" id="startDate" />
+            </div>
+
+            <div class="end-date">
+              <label for="end-date">დამთავრების რიცხვი</label> <br />
+              <input type="date" name="end-date" id="endDate" />
+            </div>
+          </div>
+
+          <div class="exp-description">
+            <label for="description">აღწერა</label><br />
+            <textarea
+              name="description"
+              id="expDesc"
+              placeholder="როლი თანამდებობაზე და ზოგადი აღწერა"
+            ></textarea>
+          </div>
+          <hr />
+          <div>
+            <button class="add-btn">მეტი გამოცდილების დამატება</button>
+          </div>
+        </div>
+        <button class="page-btn back-btn" id="back-btn">უკან</button>
         <button class="page-btn next-btn" id="next-btn">შემდეგი</button>
       </div>
       <div class="cv-side" id="output"></div>

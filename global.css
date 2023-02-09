@@ -71,6 +71,8 @@ textarea {
   height: 6rem;
   margin-top: 0.5rem;
   border: 1px solid #bcbcbc;
+  font-size: 16px;
+  padding: 0.8rem;
 }
 
 p {
@@ -88,12 +90,25 @@ p {
 .page-btn:active {
   background: #512faf;
 }
-
+.back-btn {
+  padding: 0.9rem 2.2rem;
+  font-size: 16px;
+  margin-left: 6.2rem;
+}
 .next-btn {
   float: right;
   margin-right: 7rem;
   padding: 0.9rem 2.2rem;
   font-size: 16px;
+}
+.add-btn {
+  background: #62a1eb;
+  padding: 0.9rem 1.3rem;
+}
+.add-btn:hover {
+  background: #6bb0ff;
+  transform: scale(1.1);
+  box-shadow: 0px 0px 10px rgba(0, 0, 255, 0.5);
 }
 
 .valid {
