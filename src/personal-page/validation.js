@@ -1,9 +1,13 @@
 import {
   setItem,
-  updateOutput,
   getItem,
+  updateOutput,
   showHiddenFields,
-} from "./localstorage.js";
+} from "../components/localStorage.js";
+import {
+  createErrorIcon,
+  createSuccessIcon,
+} from "../components/validation.js";
 
 const name = document.getElementById("Name");
 const lastName = document.getElementById("Lastname");
@@ -21,20 +25,12 @@ const nextBtn = document.getElementById("next-btn");
 
 export { name, lastName, email, phoneNumber, photo, aboutMe };
 
-function createSuccessIcon(id) {
-  const iconContainer = document.createElement("div");
-  iconContainer.id = `icon-container-${id}`;
-  iconContainer.classList.add("icon");
-  iconContainer.innerHTML = `<img src="../../../assets/images/success-icon.svg" />`;
-  return iconContainer;
-}
-
-function createErrorIcon(id) {
-  const iconContainer = document.createElement("div");
-  iconContainer.id = `icon-container-${id}`;
-  iconContainer.classList.add("icon");
-  iconContainer.innerHTML = `<img src="../../../assets/images/error-icon.svg" />`;
-  return iconContainer;
+function uploadErrorIcon() {
+  const svg = document.createElement("img");
+  svg.id = "upload-error-icon";
+  svg.src = "../../../assets/images/error-icon.svg";
+  svg.style.marginLeft = "7px";
+  uploadButton.after(svg);
 }
 
 function inputValidation(input, regex) {
@@ -81,19 +77,12 @@ validateInput(phoneNumber, phoneRegex);
 validateInput(photo);
 validateInput(aboutMe);
 
-function uploadErrorIcon() {
-  const svg = document.createElement("img");
-  svg.id = "upload-error-icon";
-  svg.src = "../../../assets/images/error-icon.svg";
-  svg.style.marginLeft = "7px";
-  uploadButton.after(svg);
-}
-
 function validatePhoto() {
   if (!photo.value && !document.getElementById("upload-error-icon")) {
     if (!getItem("Photo")) uploadErrorIcon();
   } else if (photo.value || getItem("Photo")) {
-    document.getElementById("upload-error-icon").remove();
+    if (document.getElementById("upload-error-icon"))
+      document.getElementById("upload-error-icon").remove();
   }
 }
 
