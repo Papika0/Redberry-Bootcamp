@@ -108,29 +108,44 @@ p {
   color: #ef5050;
 }
 
+/* CV SIDE */
+.cv-side {
+  width: 43%;
+  margin-left: 5rem;
+}
+
 .redberry-icon {
   position: absolute;
   width: 42px;
   height: 42px;
-  margin-top: 52%;
-  margin-left: 5rem;
+  top: 91.5%;
+}
+
+.name-lstname-div {
+  display: flex;
+  flex-direction: row;
+  margin-top: 4.5rem;
+  gap: 1.5rem;
 }
 
 .Name-output,
 .Lastname-output {
-  display: inline-block;
   font-weight: 700;
   font-size: 34px;
   color: #f93b1d;
-  margin-top: 4.25rem;
 }
 
-.Name-output {
-  margin-left: 5rem;
+.email-div,
+.phone-div {
+  display: flex;
+  gap: 0.6rem;
 }
 
-.Lastname-output {
-  margin-left: 1.25rem;
+.email-div {
+  margin-top: 1.2rem;
+}
+.phone-div {
+  margin-top: 0.6rem;
 }
 
 .Email-output,
@@ -138,15 +153,6 @@ p {
   font-weight: 400;
   font-size: 18px;
   color: #1a1a1a;
-  margin-left: 6.9rem;
-}
-
-.Email-output {
-  margin-top: 1.2rem;
-}
-
-.Phone-output {
-  margin-top: 0.6rem;
 }
 
 .displayedImage {
@@ -154,6 +160,22 @@ p {
   width: 246px;
   height: 246px;
   border-radius: 133px;
-  margin-left: 31rem;
-  margin-top: 3rem;
+  margin-left: 31.3rem;
+  top: 3rem;
+}
+
+.about-me-div {
+  margin-top: 2.1rem;
+}
+
+#about-me {
+  font-weight: 700;
+  font-size: 18px;
+  color: #f93b1d;
+}
+
+.AboutMe-output {
+  width: 60%;
+  margin-top: 0.9rem;
+  font-size: 16px;
 }

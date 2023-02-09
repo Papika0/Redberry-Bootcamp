@@ -18,11 +18,11 @@ function createHTML() {
         </div>
         <img src="" id="displayedImage" class="displayedImage" />
         <div class="email-div">
-          <img src="" id="email-logo" />
+          <img src="../../assets/images/email-icon.svg" id="email-icon" />
           <p id="Email-output" class="Email-output"></p>
         </div>
         <div class="phone-div">
-          <img src="" id="phone-logo" />
+          <img src="../../assets/images/phone-icon.svg" id="phone-icon" />
           <p id="Phone-output" class="Phone-output"></p>
         </div>
         <div class="about-me-div">
