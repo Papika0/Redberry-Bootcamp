@@ -109,6 +109,6 @@ nextBtn.addEventListener("click", function () {
   onSubmitValidation();
   const invalidElements = document.querySelectorAll(".invalid");
   if (invalidElements.length === 0) {
-    window.location.href = "./education.html";
+    window.location.href = "../experience-page/experience.html";
   }
 });

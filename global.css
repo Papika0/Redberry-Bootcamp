@@ -107,6 +107,44 @@ p {
 .invalid-label {
   color: #ef5050;
 }
+/* Form side */
+.container {
+  display: flex;
+  height: 100vh;
+}
+.form-side {
+  width: 57%;
+  background-color: #f9f9f9;
+}
+
+.info-header {
+  width: 80%;
+  margin: 2.9rem auto 0;
+}
+
+.info-header p {
+  display: inline-block;
+  font-weight: 700;
+  font-size: 24px;
+  color: #1a1a1a;
+  margin-bottom: 0.7rem;
+}
+.info-header p:nth-child(2) {
+  float: right;
+  font-weight: 500;
+  font-size: 20px;
+}
+.header-line {
+  border: 1px solid #1a1a1a;
+}
+.form {
+  width: 80%;
+  margin: 4.8rem auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6%;
+  height: 75%;
+}
 
 /* CV SIDE */
 .cv-side {

@@ -2,11 +2,11 @@ import { name, lastName, email, phoneNumber, aboutMe } from "./validation.js";
 
 const photoInput = document.getElementById("photoInput");
 
-export function setItem(key, value) {
+function setItem(key, value) {
   localStorage.setItem(key, value);
 }
 
-export function getItem(key) {
+function getItem(key) {
   return localStorage.getItem(key);
 }
 
@@ -34,7 +34,7 @@ function createHTML() {
   output.innerHTML = html;
 }
 
-export function updateOutput(input, value) {
+function updateOutput(input, value) {
   document.getElementById(input.id + "-output").textContent =
     input === phoneNumber ? formatPhoneNumber(value) : value;
 }
@@ -71,7 +71,7 @@ function localOutputCheck(input) {
   }
 }
 
-export function showHiddenFields(input, value) {
+function showHiddenFields(input, value) {
   if (input == email) {
     document.getElementById("email-icon").style.visibility = "visible";
   } else if (input == phoneNumber) {
@@ -109,3 +109,5 @@ window.addEventListener("load", function () {
   }
   getAllOutputs();
 });
+
+export { createHTML, setItem, getItem, updateOutput, showHiddenFields };
