@@ -7,8 +7,14 @@ function getItem(key) {
 }
 
 function updateOutput(input, value) {
-  document.getElementById(input + "-output").textContent =
-    input === "Phone" ? formatPhoneNumber(value) : value;
+  const outputElement = document.getElementById(input + "-output");
+  if (input === "Position") {
+    outputElement.textContent = value + " , ";
+  } else if (input === "startDate") {
+    outputElement.textContent = value + " -";
+  } else
+    outputElement.textContent =
+      input === "Phone" ? formatPhoneNumber(value) : value;
 }
 
 function updatePhoto() {
