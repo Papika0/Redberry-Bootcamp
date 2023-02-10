@@ -5,6 +5,7 @@ import {
   getItem,
   getAllOutputs,
   updatePhoto,
+  showDiv,
 } from "../components/localStorage.js";
 
 const photoInput = document.getElementById("photoInput");
@@ -30,4 +31,5 @@ window.addEventListener("load", function () {
   phoneNumber.value = getItem("Phone");
   aboutMe.value = getItem("AboutMe");
   getAllOutputs();
+  showDiv();
 });

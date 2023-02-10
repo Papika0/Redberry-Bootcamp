@@ -22,7 +22,7 @@
         </div>
         <div class="form">
           <div class="position">
-            <label for="position">თანამდებობა</label> <br />
+            <label for="Position">თანამდებობა</label> <br />
             <input
               type="text"
               name="position"
@@ -33,7 +33,7 @@
           </div>
 
           <div class="company">
-            <label for="company">დამსაქმებელი</label> <br />
+            <label for="Company">დამსაქმებელი</label> <br />
             <input
               type="text"
               name="company"
@@ -45,21 +45,21 @@
 
           <div class="dates">
             <div class="start-date">
-              <label for="start-date">დაწყების რიცხვი</label> <br />
+              <label for="startDate">დაწყების რიცხვი</label> <br />
               <input type="date" name="start-date" id="startDate" />
             </div>
 
             <div class="end-date">
-              <label for="end-date">დამთავრების რიცხვი</label> <br />
+              <label for="endDate">დამთავრების რიცხვი</label> <br />
               <input type="date" name="end-date" id="endDate" />
             </div>
           </div>
 
           <div class="exp-description">
-            <label for="description">აღწერა</label><br />
+            <label for="expDescription">აღწერა</label><br />
             <textarea
               name="description"
-              id="expDesc"
+              id="expDescription"
               placeholder="როლი თანამდებობაზე და ზოგადი აღწერა"
             ></textarea>
           </div>
@@ -71,7 +71,9 @@
         <button class="page-btn back-btn" id="back-btn">უკან</button>
         <button class="page-btn next-btn" id="next-btn">შემდეგი</button>
       </div>
-      <div class="cv-side" id="output"></div>
+      <div class="cv-side" id="output">
+        <img src="../../assets/icon/icon.svg" class="redberry-icon" />
+      </div>
     </div>
     <script type="module" src="validations.js"></script>
   </body>

@@ -74,6 +74,18 @@ textarea {
   font-size: 16px;
   padding: 0.8rem;
 }
+.icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.icon img {
+  width: 20px;
+  height: 20px;
+}
 
 p {
   letter-spacing: 0.5px;
@@ -226,7 +238,8 @@ p {
   word-wrap: break-word;
 }
 
-#about-me {
+#about-me,
+.exp-h1 {
   font-weight: 700;
   font-size: 18px;
   color: #f93b1d;
@@ -240,4 +253,48 @@ p {
 #email-icon,
 #phone-icon {
   visibility: hidden;
+}
+
+.hidden-div {
+  visibility: hidden;
+}
+
+.splitter {
+  margin-top: 1.25rem;
+  margin-bottom: 1.3rem;
+  width: 90%;
+}
+
+.position-company {
+  margin-top: 0.9rem;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.position-company p {
+  font-weight: 600;
+  font-size: 16px;
+  color: #1a1a1a;
+}
+
+.date-div {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.date-div p {
+  font-weight: 400;
+  font-size: 16px;
+  color: #909090;
+}
+
+.exp-output {
+  margin-top: 1rem;
+  font-weight: 400;
+  font-size: 16px;
+  color: #000000;
+  width: 90%;
 }

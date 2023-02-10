@@ -67,7 +67,24 @@ function getAllOutputs() {
   localOutputCheck("Email");
   localOutputCheck("Phone");
   localOutputCheck("AboutMe");
+  localOutputCheck("Position");
+  localOutputCheck("Company");
+  localOutputCheck("startDate");
+  localOutputCheck("endDate");
+  localOutputCheck("expDescription");
   updatePhoto();
+}
+
+function showDiv() {
+  if (
+    getItem("Position") ||
+    getItem("Company") ||
+    getItem("startDate") ||
+    getItem("endDate") ||
+    getItem("expDescription")
+  ) {
+    document.getElementById("expContainer").classList.remove("hidden-div");
+  }
 }
 
 export {
@@ -78,4 +95,5 @@ export {
   updateOutput,
   updatePhoto,
   hideHiddenFields,
+  showDiv,
 };

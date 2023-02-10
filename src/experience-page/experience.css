@@ -23,3 +23,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   filter: invert(0.3);
   margin-right: 0.5rem;
 }
+
+.position,
+.company,
+.exp-description {
+  position: relative;
+}
