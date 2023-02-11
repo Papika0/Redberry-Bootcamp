@@ -110,6 +110,7 @@ p {
 .next-btn {
   float: right;
   margin-right: 7rem;
+  margin-top: 10.2rem;
   padding: 0.9rem 2.2rem;
   font-size: 16px;
 }
@@ -169,14 +170,17 @@ p {
   margin: 4.8rem auto 0;
   display: flex;
   flex-direction: column;
-  gap: 6%;
-  height: 75%;
+  gap: 40px;
 }
 
 /* CV SIDE */
 .cv-side {
   width: 43%;
+}
+.cv-side-output {
   margin-left: 5rem;
+  background-color: #ffffff;
+  position: relative;
 }
 
 .redberry-icon {
@@ -184,6 +188,7 @@ p {
   width: 42px;
   height: 42px;
   top: 91.5%;
+  margin-left: 5rem;
 }
 
 .name-lstname-div {
@@ -226,8 +231,8 @@ p {
   width: 246px;
   height: 246px;
   border-radius: 133px;
-  margin-left: 31.3rem;
-  top: 3rem;
+  margin-left: 27rem;
+  top: 0rem;
 }
 
 .about-me-div {

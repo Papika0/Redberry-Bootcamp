@@ -1,3 +1,4 @@
+import { createFormHTML } from "../components/formHtmlCteate.js";
 import { createHTML } from "../components/cvHtmlCreate.js";
 import {
   getAllOutputs,
@@ -66,6 +67,12 @@ function onClickValidation() {
   validateInput(company);
   validateInput(expDescription);
 }
+
+const addBtn = document.getElementById("addBtn");
+
+addBtn.addEventListener("click", function () {
+  createFormHTML();
+});
 
 backBtn.addEventListener("click", function () {
   window.location.href = "../personal-page/personal.html";

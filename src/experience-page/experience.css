@@ -3,6 +3,16 @@
   gap: 3.8rem;
 }
 
+body {
+  background-color: #f9f9f9;
+}
+.cv-side {
+  background-color: #ffffff;
+}
+.form-side {
+  height: max-content;
+}
+
 .start-date,
 .end-date {
   width: 46%;
@@ -10,7 +20,15 @@
 }
 
 .form {
-  gap: 5%;
+  gap: 25px;
+}
+
+.additional-form {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin: 0 auto 0;
 }
 
 textarea {
@@ -28,4 +46,20 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .company,
 .exp-description {
   position: relative;
+}
+
+.add-btn {
+  margin-top: 1rem;
+  margin-left: 6.6rem;
+}
+
+.next-btn,
+.back-btn {
+  margin-top: 7.8rem;
+  margin-bottom: 4rem;
+}
+
+.form-splitter {
+  margin-top: 1.9rem;
+  margin-bottom: 2.3rem;
 }

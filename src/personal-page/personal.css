@@ -3,6 +3,13 @@
   gap: 3.5rem;
 }
 
+body {
+  background-color: #f9f9f9;
+}
+.cv-side {
+  background-color: #ffffff;
+}
+
 .name,
 .lastname {
   width: 46%;
