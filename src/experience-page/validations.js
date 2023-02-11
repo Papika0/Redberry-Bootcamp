@@ -107,26 +107,32 @@ function validateAdditional(value, inputs) {
 }
 
 function addExp(num) {
-  createFormHTML(num);
-  createExp(num);
-  const position = document.getElementById(`Position${num}`);
-  const company = document.getElementById(`Company${num}`);
-  const startDate = document.getElementById(`startDate${num}`);
-  const endDate = document.getElementById(`endDate${num}`);
-  const expDescription = document.getElementById(`expDescription${num}`);
-  const inputs = [position, company, expDescription, startDate, endDate];
-  validateAndStore(position);
-  validateAndStore(company);
-  validateAndStore(expDescription);
-  storeLocal(startDate);
-  storeLocal(endDate);
-  checkAdditionalExp(inputs);
+  if (!document.getElementById(`form${num}`)) {
+    createFormHTML(num);
+    createExp(num);
+    const position = document.getElementById(`Position${num}`);
+    const company = document.getElementById(`Company${num}`);
+    const startDate = document.getElementById(`startDate${num}`);
+    const endDate = document.getElementById(`endDate${num}`);
+    const expDescription = document.getElementById(`expDescription${num}`);
+    const inputs = [position, company, expDescription, startDate, endDate];
+    validateAndStore(position);
+    validateAndStore(company);
+    validateAndStore(expDescription);
+    storeLocal(startDate);
+    storeLocal(endDate);
+    checkAdditionalExp(inputs);
+  }
 }
 
 let counter = 0;
 addBtn.addEventListener("click", function () {
   counter++;
-  addExp(counter);
+  if (!document.getElementById(`form${counter}`)) addExp(counter);
+  else {
+    counter++;
+    addExp(counter);
+  }
 });
 
 backBtn.addEventListener("click", function () {
@@ -135,6 +141,10 @@ backBtn.addEventListener("click", function () {
 
 nextBtn.addEventListener("click", function () {
   onClickValidation();
+  const invalidElements = document.querySelectorAll(".invalid");
+  if (invalidElements.length === 0) {
+    window.location.href = "../education-page/education.html";
+  }
 });
 
 function showDivOnKeyUp() {
@@ -153,6 +163,35 @@ function showDivOnKeyUp() {
   });
 }
 
+function getAdditionalInputs() {
+  let prefixes = [
+    "Position",
+    "Company",
+    "expDescription",
+    "startDate",
+    "endDate",
+  ];
+
+  for (let i = 0; i < localStorage.length; i++) {
+    let key = localStorage.key(i);
+    prefixes.forEach((prefix) => {
+      if (key.startsWith(prefix) && key.substring(prefix.length) !== "") {
+        let value = localStorage.getItem(key);
+        if (value !== "") {
+          addExp(key.substring(prefix.length));
+          document.getElementById(key).value = value;
+          updateOutput(key, value);
+          nextBtn.addEventListener("click", function () {
+            if (key.startsWith("startDate") || key.startsWith("endDate")) {
+              dateValidation(document.getElementById(key));
+            } else validateInput(document.getElementById(key));
+          });
+        }
+      }
+    });
+  }
+}
+
 window.addEventListener("load", function () {
   createHTML();
   createExp();
@@ -160,4 +199,5 @@ window.addEventListener("load", function () {
   getLocalStorage();
   showDiv();
   showDivOnKeyUp();
+  getAdditionalInputs();
 });
