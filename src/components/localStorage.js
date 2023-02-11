@@ -8,13 +8,14 @@ function getItem(key) {
 
 function updateOutput(input, value) {
   const outputElement = document.getElementById(input + "-output");
-  if (input === "Position") {
+  if (input.includes("Position")) {
     outputElement.textContent = value + " , ";
   } else if (input === "startDate") {
     outputElement.textContent = value + " -";
-  } else
+  } else {
     outputElement.textContent =
       input === "Phone" ? formatPhoneNumber(value) : value;
+  }
 }
 
 function updatePhoto() {

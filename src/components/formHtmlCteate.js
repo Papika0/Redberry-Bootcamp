@@ -1,24 +1,25 @@
-function createFormHTML() {
+function createFormHTML(num) {
   const div = document.createElement("div");
   div.classList.add("additional-form");
+  div.id = `form${num}`;
   let html = `
             <div class="position">
-              <label for="Position">თანამდებობა</label> <br />
+              <label for="Position${num}">თანამდებობა</label> <br />
               <input
                 type="text"
                 name="position"
-                id="Position"
+                id="Position${num}"
                 placeholder="დეველოპერი, დიზაინერი, ა.შ."
               />
               <h5>მინიმუმ 2 სიმბოლო</h5>
             </div>
 
             <div class="company">
-              <label for="Company">დამსაქმებელი</label> <br />
+              <label for="Company${num}">დამსაქმებელი</label> <br />
               <input
                 type="text"
                 name="company"
-                id="Company"
+                id="Company${num}"
                 placeholder="დამსაქმებელი"
               />
               <h5>მინიმუმ 2 სიმბოლო</h5>
@@ -26,21 +27,21 @@ function createFormHTML() {
 
             <div class="dates">
               <div class="start-date">
-                <label for="startDate">დაწყების რიცხვი</label> <br />
-                <input type="date" name="start-date" id="startDate" />
+                <label for="startDate${num}">დაწყების რიცხვი</label> <br />
+                <input type="date" name="start-date" id="startDate${num}" />
               </div>
 
               <div class="end-date">
-                <label for="endDate">დამთავრების რიცხვი</label> <br />
-                <input type="date" name="end-date" id="endDate" />
+                <label for="endDate${num}">დამთავრების რიცხვი</label> <br />
+                <input type="date" name="end-date" id="endDate${num}" />
               </div>
             </div>
 
             <div class="exp-description">
-              <label for="expDescription">აღწერა</label><br />
+              <label for="expDescription${num}">აღწერა</label><br />
               <textarea
                 name="description"
-                id="expDescription"
+                id="expDescription${num}"
                 placeholder="როლი თანამდებობაზე და ზოგადი აღწერა"
               ></textarea>
             </div>

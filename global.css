@@ -269,7 +269,9 @@ p {
   margin-bottom: 1.3rem;
   width: 90%;
 }
-
+.experience-container {
+  width: 90%;
+}
 .position-company {
   margin-top: 0.9rem;
   display: flex;

@@ -1,5 +1,5 @@
 import { name, lastName, email, phoneNumber, aboutMe } from "./validation.js";
-import { createHTML } from "../components/cvHtmlCreate.js";
+import { createHTML, createExp } from "../components/cvHtmlCreate.js";
 import {
   setItem,
   getItem,
@@ -25,6 +25,7 @@ photoInput.addEventListener("change", function () {
 
 window.addEventListener("load", function () {
   createHTML();
+  createExp();
   name.value = getItem("Name");
   lastName.value = getItem("Lastname");
   email.value = getItem("Email");

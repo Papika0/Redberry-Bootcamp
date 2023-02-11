@@ -1,5 +1,5 @@
 import { createFormHTML } from "../components/formHtmlCteate.js";
-import { createHTML } from "../components/cvHtmlCreate.js";
+import { createHTML, createExp } from "../components/cvHtmlCreate.js";
 import {
   getAllOutputs,
   setItem,
@@ -70,8 +70,63 @@ function onClickValidation() {
 
 const addBtn = document.getElementById("addBtn");
 
+function checkAdditionalExp(inputs) {
+  inputs.forEach((input) => {
+    input.addEventListener("keyup", function () {
+      if (input.value === "") {
+        validateAdditional(false, inputs);
+      } else {
+        validateAdditional(true, inputs);
+      }
+    });
+  });
+}
+
+function validateAdditional(value, inputs) {
+  nextBtn.addEventListener("click", function () {
+    if (value === true) {
+      validateInput(inputs[0]);
+      validateInput(inputs[1]);
+      validateInput(inputs[2]);
+      dateValidation(inputs[3]);
+      dateValidation(inputs[4]);
+    } else {
+      inputs.forEach((input) => {
+        const label = document.querySelector(`label[for="${input.id}"]`);
+        const iconContainer = document.getElementById(
+          `icon-container-${input.id}`
+        );
+        input.classList.remove("invalid");
+        label.classList.remove("invalid-label");
+        if (iconContainer) {
+          iconContainer.remove();
+        }
+      });
+    }
+  });
+}
+
+function addExp(num) {
+  createFormHTML(num);
+  createExp(num);
+  const position = document.getElementById(`Position${num}`);
+  const company = document.getElementById(`Company${num}`);
+  const startDate = document.getElementById(`startDate${num}`);
+  const endDate = document.getElementById(`endDate${num}`);
+  const expDescription = document.getElementById(`expDescription${num}`);
+  const inputs = [position, company, expDescription, startDate, endDate];
+  validateAndStore(position);
+  validateAndStore(company);
+  validateAndStore(expDescription);
+  storeLocal(startDate);
+  storeLocal(endDate);
+  checkAdditionalExp(inputs);
+}
+
+let counter = 0;
 addBtn.addEventListener("click", function () {
-  createFormHTML();
+  counter++;
+  addExp(counter);
 });
 
 backBtn.addEventListener("click", function () {
@@ -100,6 +155,7 @@ function showDivOnKeyUp() {
 
 window.addEventListener("load", function () {
   createHTML();
+  createExp();
   getAllOutputs();
   getLocalStorage();
   showDiv();

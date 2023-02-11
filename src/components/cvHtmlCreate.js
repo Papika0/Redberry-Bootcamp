@@ -1,4 +1,6 @@
 function createHTML() {
+  const div = document.createElement("div");
+  div.classList.add("infoDiv");
   let html = `
         <div class="name-lstname-div">
           <p id="Name-output" class="Name-output"></p>
@@ -17,23 +19,41 @@ function createHTML() {
           <h1 id="about-me">ჩემ შესახებ</h1>
           <p id="AboutMe-output" class="AboutMe-output"></p>
         </div>
-        <div class="experience-container hidden-div" id="expContainer">
-        <hr class="splitter"/>
-          <div class="exp-div">
-            <h1 class="exp-h1">გამოცდილება</h1>
-            <div class="position-company">
-              <p id="Position-output" class="Position-output"></p>
-              <p id="Company-output" class="Company-output"></p>
-            </div>
-            <div class="date-div">
-              <p id="startDate-output" class="startDate-output"></p>
-              <p id="endDate-output" class="endDate-output"></p>
-              </div>
-            <p id="expDescription-output" class="exp-output"></p>
-          </div>
-        </div>
+        
   `;
-  document.getElementById("output").innerHTML = html;
+  div.innerHTML = html;
+  document.getElementById("output").appendChild(div);
 }
 
-export { createHTML };
+function createExp(num) {
+  let hidden = "";
+  let expHeader = "";
+  if (!num) {
+    num = "";
+    hidden = "hidden-div";
+    expHeader = `<hr class="splitter"/>
+            <h1 class="exp-h1">გამოცდილება</h1>`;
+  }
+  const div = document.createElement("div");
+  div.classList.add("exp-div");
+  div.id = `exp-div${num}`;
+  let html = `
+        <div class="experience-container ${hidden}" id="expContainer${num}">
+        ${expHeader}
+            <div class="position-company">
+              <p id="Position${num}-output" class="Position-output"></p>
+              <p id="Company${num}-output" class="Company-output"></p>
+            </div>
+            <div class="date-div">
+              <p id="startDate${num}-output" class="startDate-output"></p>
+              <p id="endDate${num}-output" class="endDate-output"></p>
+              </div>
+            <p id="expDescription${num}-output" class="exp-output"></p>
+          </div>
+       
+  `;
+  div.innerHTML = html;
+  document.getElementById("output").appendChild(div);
+}
+
+export { createHTML, createExp };
