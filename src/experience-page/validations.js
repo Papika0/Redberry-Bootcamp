@@ -92,9 +92,8 @@ function onClickValidation() {
 }
 
 const addBtn = document.getElementById("addBtn");
-let counter = 0;
+let counter = 1;
 addBtn.addEventListener("click", function () {
-  counter++;
   if (!document.getElementById(`form${counter}`)) addExp(counter);
   else {
     counter++;

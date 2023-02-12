@@ -316,3 +316,11 @@ p {
   color: #000000;
   width: 90%;
 }
+
+.additional-form {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin: 0 auto 0;
+}

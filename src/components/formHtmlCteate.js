@@ -51,4 +51,51 @@ function createFormHTML(num) {
   document.getElementById("addBtnContainer").appendChild(div);
 }
 
-export { createFormHTML };
+function createFormEdu(num) {
+  const div = document.createElement("div");
+  div.classList.add("additional-form");
+  div.id = `form${num}`;
+  let html = `
+           <div class="institute">
+            <label for="Institute${num}">სასწავლებელი</label> <br />
+            <input
+              type="text"
+              name="position"
+              id="Institute${num}"
+              placeholder="სასწავლებელი"
+            />
+            <h5>მინიმუმ 2 სიმბოლო</h5>
+          </div>
+
+          <div class="edu-date">
+            <div id="Degree-div">
+              <div>
+                <label for="Degree${num}">ხარისხი</label>
+              </div>
+              <div class="select-div">
+                <select id="Degree${num}"></select>
+              </div>
+            </div>
+
+            <div class="due-date">
+              <label for="dueDate${num}">დამთავრების რიცხვი</label> <br />
+              <input type="date" name="end-date" id="dueDate${num}" />
+            </div>
+          </div>
+
+          <div class="edu-description">
+            <label for="eduDescription${num}">აღწერა</label><br />
+            <textarea
+              name="description"
+              id="eduDescription${num}"
+              class="eduDescription"
+              placeholder="განათლების აღწერა"
+            ></textarea>
+          </div>
+          <hr class="form-splitter" />
+  `;
+  div.innerHTML = html;
+  document.getElementById("addBtnContainer").appendChild(div);
+}
+
+export { createFormHTML, createFormEdu };

@@ -11,7 +11,7 @@ function updateOutput(input, value) {
   if (outputElement) {
     if (input.includes("Position") || input.includes("Institute")) {
       outputElement.textContent = value + " , ";
-    } else if (input === "startDate") {
+    } else if (input.includes("startDate")) {
       outputElement.textContent = value + " -";
     } else {
       outputElement.textContent =

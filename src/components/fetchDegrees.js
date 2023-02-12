@@ -1,4 +1,5 @@
-async function fetchDegrees() {
+async function fetchDegrees(num) {
+  if (!num) num = "";
   try {
     const response = await fetch(
       "https://resume.redberryinternship.ge/api/degrees"
@@ -11,7 +12,7 @@ async function fetchDegrees() {
     options.unshift(
       `<option value="" disabled selected>აირჩიეთ ხარისხი</option>`
     );
-    document.getElementById("Degree").innerHTML = options.join("");
+    document.getElementById(`Degree${num}`).innerHTML = options.join("");
   } catch (error) {
     console.log(error);
   }
