@@ -7,7 +7,7 @@ async function fetchDegrees(num) {
     const data = await response.json();
 
     const options = data.map((item) => {
-      return `<option value="${item.title}">${item.title}</option>`;
+      return `<option value="${item.id}">${item.title}</option>`;
     });
     options.unshift(`<option value="" selected>აირჩიეთ ხარისხი</option>`);
     document.getElementById(`Degree${num}`).innerHTML = options.join("");

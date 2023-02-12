@@ -15,6 +15,7 @@ import {
 import { validateInput } from "../components/validation.js";
 import { fetchDegrees } from "../components/fetchDegrees.js";
 import { getAdditionalInputs } from "../components/getAdditional.js";
+import { postData } from "../components/postApi.js";
 
 const institute = document.getElementById("Institute");
 const degree = document.getElementById("Degree");
@@ -61,6 +62,10 @@ function listenAndStore(input) {
     }
     if (inputId.includes("dueDate") || inputId.includes("Degree")) {
       validateSelectDate(input);
+    }
+    if (inputId.includes("Degree")) {
+      setItem("degreeid", input.options[input.selectedIndex].value);
+      setItem(inputId, value);
     }
     setItem(inputId, value);
     updateOutput(inputId, value);
@@ -117,7 +122,7 @@ function getLocalStorage() {
   if (degreeValue) {
     const degreeDropdown = document.querySelector("#Degree");
     for (let i = 0; i < degreeDropdown.options.length; i++) {
-      if (degreeDropdown.options[i].value === degreeValue) {
+      if (degreeDropdown.options[i].innerText === degreeValue) {
         degreeDropdown.selectedIndex = i;
         break;
       }
@@ -258,11 +263,11 @@ function deleteDefaultDegree() {
 nextBtn.addEventListener("click", function () {
   validateOnClick(inputs);
   onClickValAdd();
-  // getAdditionalInputsEdu();
   const invalidElements = document.querySelectorAll(".invalid");
   console.log(invalidElements);
   if (invalidElements.length === 0) {
     console.log("valid");
+    postData();
   }
 });
 
