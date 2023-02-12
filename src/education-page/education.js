@@ -72,7 +72,7 @@ function listenAndStore(input) {
 
 function validateSelectDate(input) {
   const label = document.querySelector(`label[for="${input.id}"]`);
-  if (input.value === "") {
+  if (input.value === "" || input.value === "აირჩიეთ ხარისხი") {
     input.classList.remove("valid");
     input.classList.add("invalid");
     label.classList.add("invalid-label");
@@ -91,13 +91,14 @@ listenAndStore(degree);
 function validateOnClick(inputs) {
   inputs.forEach((input) => {
     let value = input.value;
-    if (input === degree) {
+    let inputId = input.id;
+    if (inputId.includes("Degree")) {
       value = input.options[input.selectedIndex].text;
     }
-    if (input === institute || input === eduDescription) {
+    if (inputId.includes("Institute") || inputId.includes("eduDescription")) {
       validateInput(input, value);
     }
-    if (input === dueDate || input === degree) {
+    if (inputId.includes("dueDate") || inputId.includes("Degree")) {
       validateSelectDate(input);
     }
   });
@@ -188,54 +189,88 @@ backBtn.addEventListener("click", function () {
   window.location.href = "../experience-page/experience.html";
 });
 
+let keysToValidate = [];
+let prefixes = ["Institute", "Degree", "eduDescription", "dueDate"];
+let prefixMap = {};
 function getAdditionalInputsEdu() {
-  let keysToValidate = [];
-  let prefixes = ["Institute", "Degree", "eduDescription", "dueDate"];
-  let prefixMap = {};
   for (let i = 0; i < localStorage.length; i++) {
     let key = localStorage.key(i);
     prefixes.forEach((prefix) => {
       if (key.startsWith(prefix) && key.substring(prefix.length) !== "") {
-        let value = localStorage.getItem(key);
+        let value = getItem(key);
         let keyIndex = key.substring(prefix.length);
         if (!prefixMap[keyIndex]) prefixMap[keyIndex] = [];
         prefixMap[keyIndex].push(prefix + keyIndex);
         addEdu(keyIndex);
-        fetchDegrees(keyIndex);
-        document.getElementById(key).value = value;
-        updateOutput(key, value);
-        if (key.includes("Degree")) {
-          const degreeDropdown = document.getElementById(key);
-          console.log(degreeDropdown);
-          for (let i = 0; i < degreeDropdown.options.length; i++) {
-            if (degreeDropdown.options[i].value === value) {
-              degreeDropdown.selectedIndex = i;
-              break;
+        const degreeDropdown = document.getElementById(key);
+        fetchDegrees(keyIndex).then(() => {
+          if (getItem(key) && key.includes("Degree")) {
+            for (let i = 0; i < degreeDropdown.options.length; i++) {
+              if (degreeDropdown.options[i].value === value) {
+                degreeDropdown.selectedIndex = i;
+                break;
+              }
             }
           }
-        }
+        });
+        document.getElementById(key).value = value;
+        updateOutput(key, value);
       }
     });
   }
+}
+
+function onClickValAdd() {
   for (let keyIndex in prefixMap) {
-    keysToValidate = prefixes.map((prefix) => prefix + keyIndex);
-    keysToValidate.forEach((key) => {
-      listenAndStore(document.getElementById(key));
-    });
+    keysToValidate = prefixes.map((prefix) =>
+      document.getElementById(prefix + keyIndex)
+    );
+
+    if (keysToValidate.some((key) => key.value !== "")) {
+      validateOnClick(keysToValidate);
+    } else {
+      keysToValidate.forEach((input) => {
+        const label = document.querySelector(`label[for="${input.id}"]`);
+        const iconContainer = document.getElementById(
+          `icon-container-${input.id}`
+        );
+        input.classList.remove("invalid");
+        label.classList.remove("invalid-label");
+        if (iconContainer) {
+          iconContainer.remove();
+        }
+      });
+    }
+  }
+}
+
+function deleteDefaultDegree() {
+  let prefix = "Degree";
+  for (let i = 0; i < localStorage.length; i++) {
+    let key = localStorage.key(i);
+    let value = getItem(key);
+    if (key.startsWith(prefix) && key.substring(prefix.length) !== "") {
+      if (value === "აირჩიეთ ხარისხი") localStorage.removeItem(key);
+    }
   }
 }
 
 nextBtn.addEventListener("click", function () {
   validateOnClick(inputs);
-  getAdditionalInputsEdu();
+  onClickValAdd();
+  // getAdditionalInputsEdu();
   const invalidElements = document.querySelectorAll(".invalid");
   console.log(invalidElements);
+  if (invalidElements.length === 0) {
+    console.log("valid");
+  }
 });
 
 await fetchDegrees();
 createHTML();
 createExp();
 getAdditionalInputs();
+deleteDefaultDegree();
 createEdu();
 getAllOutputs();
 showDiv();
