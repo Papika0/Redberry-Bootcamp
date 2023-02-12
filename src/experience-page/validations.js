@@ -161,8 +161,8 @@ function addExp(num) {
   }
 }
 
-let keysToValidate = [];
 function getAdditionalInputs() {
+  let keysToValidate = [];
   let prefixes = [
     "Position",
     "Company",
@@ -170,22 +170,22 @@ function getAdditionalInputs() {
     "startDate",
     "endDate",
   ];
-  let keyIndex = 0;
+  let prefixMap = {};
   for (let i = 0; i < localStorage.length; i++) {
     let key = localStorage.key(i);
     prefixes.forEach((prefix) => {
       if (key.startsWith(prefix) && key.substring(prefix.length) !== "") {
         let value = localStorage.getItem(key);
-        if (value !== "") {
-          addExp(key.substring(prefix.length));
-          document.getElementById(key).value = value;
-          updateOutput(key, value);
-          keyIndex = key.substring(prefix.length);
-        } else keyIndex = 0;
+        let keyIndex = key.substring(prefix.length);
+        if (!prefixMap[keyIndex]) prefixMap[keyIndex] = [];
+        prefixMap[keyIndex].push(prefix + keyIndex);
+        addExp(keyIndex);
+        document.getElementById(key).value = value;
+        updateOutput(key, value);
       }
     });
   }
-  if (keyIndex !== 0) {
+  for (let keyIndex in prefixMap) {
     keysToValidate = prefixes.map((prefix) => prefix + keyIndex);
     keysToValidate.forEach((key) => {
       if (key.startsWith("startDate") || key.startsWith("endDate")) {
@@ -194,13 +194,15 @@ function getAdditionalInputs() {
     });
   }
 }
-getAdditionalInputs();
+
 nextBtn.addEventListener("click", function (e) {
   getAdditionalInputs();
   onClickValidation();
   const invalidElements = document.querySelectorAll(".invalid");
+  console.log(invalidElements);
   if (invalidElements.length === 0) {
-    window.location.href = "../education-page/education.html";
+    console.log("valid");
+    // window.location.href = "../education-page/education.html";
   } else {
     e.preventDefault();
   }
@@ -209,6 +211,7 @@ nextBtn.addEventListener("click", function (e) {
 window.addEventListener("load", function () {
   createHTML();
   createExp();
+  getAdditionalInputs();
   getAllOutputs();
   getLocalStorage();
   showDiv();
