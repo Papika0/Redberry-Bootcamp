@@ -5,6 +5,7 @@ import {
 } from "../components/cvHtmlCreate.js";
 import {
   setItem,
+  getItem,
   getAllOutputs,
   showDiv,
   updateOutput,
@@ -24,7 +25,7 @@ function showDivOnKeyUp() {
   const inputs = [institute, eduDescription, dueDate, degree];
   inputs.forEach((input) => {
     let method = "keyup";
-    if (input.type === "date") {
+    if (input === dueDate || input === degree) {
       method = "change";
     }
     const eduContainer = document.getElementById("eduContainer");
@@ -40,36 +41,61 @@ function showDivOnKeyUp() {
   });
 }
 
-function validateAndStore(input) {
+function listenAndStore(input) {
   let method = "keyup";
-  if (input === dueDate) {
+  if (input === dueDate || input === degree) {
     method = "change";
   }
   input.addEventListener(method, function () {
-    setItem(input.id, input.value);
-    updateOutput(input.id, input.value);
-    if (input.value === "") {
+    let value = input.value;
+    if (input === degree) {
+      value = input.options[input.selectedIndex].text;
+    }
+    setItem(input.id, value);
+    updateOutput(input.id, value);
+    if (value === "") {
       localStorage.removeItem(input.id);
     }
   });
 }
 
-validateAndStore(institute);
-validateAndStore(eduDescription);
-validateAndStore(dueDate);
+listenAndStore(institute);
+listenAndStore(eduDescription);
+listenAndStore(dueDate);
+listenAndStore(degree);
+
+function getLocalStorage() {
+  const inputs = [institute, eduDescription, dueDate];
+  inputs.forEach((input) => {
+    const value = getItem(input.id);
+    if (value) {
+      input.value = value;
+    }
+  });
+
+  const degreeValue = getItem("Degree");
+  if (degreeValue) {
+    const degreeDropdown = document.querySelector("#Degree");
+    for (let i = 0; i < degreeDropdown.options.length; i++) {
+      if (degreeDropdown.options[i].value === degreeValue) {
+        degreeDropdown.selectedIndex = i;
+        break;
+      }
+    }
+  }
+}
 
 backBtn.addEventListener("click", function () {
   window.location.href = "../experience-page/experience.html";
 });
 
-window.addEventListener("load", function () {
-  fetchDegrees();
-  createHTML();
-  createExp();
-  getAdditionalInputs();
-  createEdu();
-  getAllOutputs();
-  showDiv();
-  localEmptyClear();
-  showDivOnKeyUp();
-});
+await fetchDegrees();
+createHTML();
+createExp();
+getAdditionalInputs();
+createEdu();
+getAllOutputs();
+showDiv();
+localEmptyClear();
+showDivOnKeyUp();
+getLocalStorage();

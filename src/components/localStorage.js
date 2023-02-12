@@ -8,7 +8,7 @@ function getItem(key) {
 
 function updateOutput(input, value) {
   const outputElement = document.getElementById(input + "-output");
-  if (input.includes("Position")) {
+  if (input.includes("Position") || input.includes("Institute")) {
     outputElement.textContent = value + " , ";
   } else if (input === "startDate") {
     outputElement.textContent = value + " -";
@@ -80,6 +80,10 @@ function getAllOutputs() {
   localOutputCheck("endDate");
   localOutputCheck("expDescription");
   updatePhoto();
+  localOutputCheck("Institute");
+  localOutputCheck("Degree");
+  localOutputCheck("eduDescription");
+  localOutputCheck("dueDate");
 }
 
 function showDiv() {
@@ -91,6 +95,14 @@ function showDiv() {
     getItem("expDescription")
   ) {
     document.getElementById("expContainer").classList.remove("hidden-div");
+  }
+  if (
+    getItem("Institute") ||
+    getItem("Degree") ||
+    getItem("eduDescription") ||
+    getItem("dueDate")
+  ) {
+    document.getElementById("eduContainer").classList.remove("hidden-div");
   }
 }
 
