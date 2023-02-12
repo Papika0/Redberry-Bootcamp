@@ -56,4 +56,34 @@ function createExp(num) {
   document.getElementById("output").appendChild(div);
 }
 
-export { createHTML, createExp };
+function createEdu(num) {
+  let hidden = "";
+  let expHeader = "";
+  if (!num) {
+    num = "";
+    hidden = "hidden-div";
+    expHeader = `<hr class="splitter"/>
+            <h1 class="exp-h1">ᲒᲐᲜᲐᲗᲚᲔᲑᲐ</h1>`;
+  }
+  const div = document.createElement("div");
+  div.classList.add("exp-div");
+  div.id = `edu-div${num}`;
+  let html = `
+        <div class="experience-container ${hidden}" id="eduContainer${num}">
+        ${expHeader}
+            <div class="position-company">
+              <p id="Institute${num}-output" class="Position-output"></p>
+              <p id="Degree${num}-output" class="Company-output"></p>
+            </div>
+            <div class="date-div">
+              <p id="dueDate${num}-output" class="endDate-output"></p>
+              </div>
+            <p id="eduDescription${num}-output" class="exp-output"></p>
+          </div>
+       
+  `;
+  div.innerHTML = html;
+  document.getElementById("output").appendChild(div);
+}
+
+export { createHTML, createExp, createEdu };

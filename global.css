@@ -26,7 +26,8 @@
   background: #ffffff;
 }
 
-input {
+input,
+select {
   height: 3rem;
   background: #ffffff;
   border: 1px solid #bcbcbc;
@@ -37,11 +38,13 @@ input {
   margin-bottom: 0.5rem;
 }
 
-input:hover {
+input:hover,
+select:hover {
   border: 2px solid #bcbcbc;
 }
 
-input:focus {
+input:focus,
+select:focus {
   outline: none;
 }
 
@@ -73,6 +76,13 @@ textarea {
   border: 1px solid #bcbcbc;
   font-size: 16px;
   padding: 0.8rem;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  width: 20px;
+  height: 20px;
+  filter: invert(0.3);
+  margin-right: 0.5rem;
 }
 .icon {
   position: absolute;

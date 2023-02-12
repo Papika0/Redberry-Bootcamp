@@ -201,8 +201,7 @@ nextBtn.addEventListener("click", function (e) {
   const invalidElements = document.querySelectorAll(".invalid");
   console.log(invalidElements);
   if (invalidElements.length === 0) {
-    console.log("valid");
-    // window.location.href = "../education-page/education.html";
+    window.location.href = "../education-page/education.html";
   } else {
     e.preventDefault();
   }
