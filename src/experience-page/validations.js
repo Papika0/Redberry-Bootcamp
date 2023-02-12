@@ -6,6 +6,7 @@ import {
   getItem,
   updateOutput,
   showDiv,
+  localEmptyClear,
 } from "../components/localStorage.js";
 import { validateInput } from "../components/validation.js";
 const backBtn = document.getElementById("back-btn");
@@ -17,11 +18,30 @@ const startDate = document.getElementById("startDate");
 const endDate = document.getElementById("endDate");
 const expDescription = document.getElementById("expDescription");
 
+function showDivOnKeyUp() {
+  const inputs = [position, company, startDate, endDate, expDescription];
+  inputs.forEach((input) => {
+    const expContainer = document.getElementById("expContainer");
+    input.addEventListener("keyup", function () {
+      if (inputs.every((input) => input.value === "")) {
+        if (!expContainer.classList.contains("hidden-div")) {
+          expContainer.classList.add("hidden-div");
+        }
+      } else {
+        expContainer.classList.remove("hidden-div");
+      }
+    });
+  });
+}
+
 function validateAndStore(input) {
   input.addEventListener("keyup", function () {
     validateInput(input);
     setItem(input.id, input.value);
     updateOutput(input.id, input.value);
+    if (input.value === "") {
+      localStorage.removeItem(input.id);
+    }
   });
 }
 
@@ -33,6 +53,9 @@ function storeLocal(input) {
   input.addEventListener("change", function () {
     setItem(input.id, input.value);
     updateOutput(input.id, input.value);
+    if (input.value === "") {
+      localStorage.removeItem(input.id);
+    }
   });
 }
 
@@ -69,6 +92,19 @@ function onClickValidation() {
 }
 
 const addBtn = document.getElementById("addBtn");
+let counter = 0;
+addBtn.addEventListener("click", function () {
+  counter++;
+  if (!document.getElementById(`form${counter}`)) addExp(counter);
+  else {
+    counter++;
+    addExp(counter);
+  }
+});
+
+backBtn.addEventListener("click", function () {
+  window.location.href = "../personal-page/personal.html";
+});
 
 function checkAdditionalExp(inputs) {
   inputs.forEach((input) => {
@@ -125,44 +161,7 @@ function addExp(num) {
   }
 }
 
-let counter = 0;
-addBtn.addEventListener("click", function () {
-  counter++;
-  if (!document.getElementById(`form${counter}`)) addExp(counter);
-  else {
-    counter++;
-    addExp(counter);
-  }
-});
-
-backBtn.addEventListener("click", function () {
-  window.location.href = "../personal-page/personal.html";
-});
-
-nextBtn.addEventListener("click", function () {
-  onClickValidation();
-  const invalidElements = document.querySelectorAll(".invalid");
-  if (invalidElements.length === 0) {
-    window.location.href = "../education-page/education.html";
-  }
-});
-
-function showDivOnKeyUp() {
-  const inputs = [position, company, startDate, endDate, expDescription];
-  inputs.forEach((input) => {
-    const expContainer = document.getElementById("expContainer");
-    input.addEventListener("keyup", function () {
-      if (inputs.every((input) => input.value === "")) {
-        if (!expContainer.classList.contains("hidden-div")) {
-          expContainer.classList.add("hidden-div");
-        }
-      } else {
-        expContainer.classList.remove("hidden-div");
-      }
-    });
-  });
-}
-
+let keysToValidate = [];
 function getAdditionalInputs() {
   let prefixes = [
     "Position",
@@ -171,7 +170,7 @@ function getAdditionalInputs() {
     "startDate",
     "endDate",
   ];
-
+  let keyIndex = 0;
   for (let i = 0; i < localStorage.length; i++) {
     let key = localStorage.key(i);
     prefixes.forEach((prefix) => {
@@ -181,16 +180,31 @@ function getAdditionalInputs() {
           addExp(key.substring(prefix.length));
           document.getElementById(key).value = value;
           updateOutput(key, value);
-          nextBtn.addEventListener("click", function () {
-            if (key.startsWith("startDate") || key.startsWith("endDate")) {
-              dateValidation(document.getElementById(key));
-            } else validateInput(document.getElementById(key));
-          });
-        }
+          keyIndex = key.substring(prefix.length);
+        } else keyIndex = 0;
       }
     });
   }
+  if (keyIndex !== 0) {
+    keysToValidate = prefixes.map((prefix) => prefix + keyIndex);
+    keysToValidate.forEach((key) => {
+      if (key.startsWith("startDate") || key.startsWith("endDate")) {
+        dateValidation(document.getElementById(key));
+      } else validateInput(document.getElementById(key));
+    });
+  }
 }
+getAdditionalInputs();
+nextBtn.addEventListener("click", function (e) {
+  getAdditionalInputs();
+  onClickValidation();
+  const invalidElements = document.querySelectorAll(".invalid");
+  if (invalidElements.length === 0) {
+    window.location.href = "../education-page/education.html";
+  } else {
+    e.preventDefault();
+  }
+});
 
 window.addEventListener("load", function () {
   createHTML();
@@ -199,5 +213,5 @@ window.addEventListener("load", function () {
   getLocalStorage();
   showDiv();
   showDivOnKeyUp();
-  getAdditionalInputs();
+  localEmptyClear();
 });

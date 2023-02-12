@@ -94,6 +94,15 @@ function showDiv() {
   }
 }
 
+function localEmptyClear() {
+  for (var i = 0; i < localStorage.length; i++) {
+    var key = localStorage.key(i);
+    if (localStorage.getItem(key) === "") {
+      localStorage.removeItem(key);
+    }
+  }
+}
+
 export {
   setItem,
   getItem,
@@ -103,4 +112,5 @@ export {
   updatePhoto,
   hideHiddenFields,
   showDiv,
+  localEmptyClear,
 };
