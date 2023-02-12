@@ -24,6 +24,11 @@ label {
   margin-bottom: 8px;
 }
 
+.institute,
+.edu-description {
+  position: relative;
+}
+
 #degree.div > div {
   width: 46%;
 }

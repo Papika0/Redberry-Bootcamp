@@ -18,10 +18,10 @@ function validateInput(input) {
   const label = document.querySelector(`label[for="${input.id}"]`);
   const inputId = input.id;
   const iconContainer = document.getElementById(`icon-container-${inputId}`);
-  if (input === expDescription && input.value.length !== 0) {
+  if (inputId === "expDescription" && input.value.length !== 0) {
     input.classList.remove("invalid");
     input.classList.add("valid");
-  } else if (input === expDescription && input.value.length === 0) {
+  } else if (inputId === "expDescription" && input.value.length === 0) {
     input.classList.remove("valid");
     input.classList.add("invalid");
   }

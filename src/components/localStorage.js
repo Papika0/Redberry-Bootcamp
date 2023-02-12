@@ -8,13 +8,15 @@ function getItem(key) {
 
 function updateOutput(input, value) {
   const outputElement = document.getElementById(input + "-output");
-  if (input.includes("Position") || input.includes("Institute")) {
-    outputElement.textContent = value + " , ";
-  } else if (input === "startDate") {
-    outputElement.textContent = value + " -";
-  } else {
-    outputElement.textContent =
-      input === "Phone" ? formatPhoneNumber(value) : value;
+  if (outputElement) {
+    if (input.includes("Position") || input.includes("Institute")) {
+      outputElement.textContent = value + " , ";
+    } else if (input === "startDate") {
+      outputElement.textContent = value + " -";
+    } else {
+      outputElement.textContent =
+        input === "Phone" ? formatPhoneNumber(value) : value;
+    }
   }
 }
 
@@ -102,7 +104,8 @@ function showDiv() {
     getItem("eduDescription") ||
     getItem("dueDate")
   ) {
-    document.getElementById("eduContainer").classList.remove("hidden-div");
+    if (document.getElementById("eduContainer"))
+      document.getElementById("eduContainer").classList.remove("hidden-div");
   }
 }
 
