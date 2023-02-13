@@ -271,7 +271,6 @@ nextBtn.addEventListener("click", function () {
   validateOnClick(inputs);
   onClickValAdd();
   const invalidElements = document.querySelectorAll(".invalid");
-  console.log(invalidElements);
   if (invalidElements.length === 0) {
     postData();
     console.log("valid");
