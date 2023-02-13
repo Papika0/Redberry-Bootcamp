@@ -335,3 +335,13 @@ p {
   line-break: anywhere;
   width: 90%;
 }
+
+.name-lstname-div {
+  width: 65%;
+  word-break: break-all;
+}
+
+.email-div {
+  width: 55%;
+  word-wrap: anywhere;
+}
