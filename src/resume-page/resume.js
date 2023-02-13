@@ -4,6 +4,7 @@ import {
   createHTML,
 } from "../components/cvHtmlCreate.js";
 const postData = JSON.parse(localStorage.getItem("postData"));
+const closeBtn = document.getElementById("closeBtn");
 
 function displayInfo(postData) {
   createHTML();
@@ -83,4 +84,8 @@ displayEducationData(postData);
 
 document.querySelectorAll(".hidden-div").forEach((div) => {
   div.classList.remove("hidden-div");
+});
+
+closeBtn.addEventListener("click", () => {
+  document.querySelector(".pop-up").style.display = "none";
 });
