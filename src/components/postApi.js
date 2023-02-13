@@ -89,12 +89,9 @@ async function postData() {
           throw new Error(text);
         });
       } else {
-        console.log(res);
         res.json().then((data) => {
-          console.log(data);
           localStorage.clear();
           localStorage.setItem("postData", JSON.stringify(data));
-          console.log(localStorage.getItem("postData"));
           window.location.href = "../resume-page/resume.html";
         });
       }

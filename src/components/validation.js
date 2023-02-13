@@ -47,4 +47,22 @@ function validateInput(input) {
   }
 }
 
-export { createSuccessIcon, createErrorIcon, validateInput };
+function validateSelectDate(input, index) {
+  const label = document.querySelector(`label[for="${input.id}"]`);
+  if (input.value === "" || index === "აირჩიეთ ხარისხი") {
+    input.classList.remove("valid");
+    input.classList.add("invalid");
+    label.classList.add("invalid-label");
+  } else {
+    input.classList.remove("invalid");
+    input.classList.add("valid");
+    label.classList.remove("invalid-label");
+  }
+}
+
+export {
+  createSuccessIcon,
+  createErrorIcon,
+  validateInput,
+  validateSelectDate,
+};

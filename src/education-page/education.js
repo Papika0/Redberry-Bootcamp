@@ -11,8 +11,9 @@ import {
   showDiv,
   updateOutput,
   localEmptyClear,
+  showDivOnKeyUp,
 } from "../components/localStorage.js";
-import { validateInput } from "../components/validation.js";
+import { validateInput, validateSelectDate } from "../components/validation.js";
 import { fetchDegrees } from "../components/fetchDegrees.js";
 import { getAdditionalInputs } from "../components/getAdditional.js";
 import { postData } from "../components/postApi.js";
@@ -27,25 +28,6 @@ const nextBtn = document.getElementById("next-btn");
 const addBtn = document.getElementById("addBtn");
 const inputs = [institute, eduDescription, dueDate, degree];
 
-function showDivOnKeyUp() {
-  inputs.forEach((input) => {
-    let method = "keyup";
-    if (input === dueDate || input === degree) {
-      method = "change";
-    }
-    const eduContainer = document.getElementById("eduContainer");
-    input.addEventListener(method, function () {
-      if (inputs.every((input) => input.value === "")) {
-        if (!eduContainer.classList.contains("hidden-div")) {
-          eduContainer.classList.add("hidden-div");
-        }
-      } else {
-        eduContainer.classList.remove("hidden-div");
-      }
-    });
-  });
-}
-
 function listenAndStore(input) {
   let method = "keyup";
   const inputId = input.id;
@@ -55,7 +37,7 @@ function listenAndStore(input) {
   input.addEventListener(method, function () {
     let value = input.value;
     if (inputId.includes("Degree")) {
-      value = input.options[input.selectedIndex].text;
+      value = input.options[input.selectedIndex].innerText;
     }
     if (inputId.includes("Institute") || inputId.includes("eduDescription")) {
       validateInput(input, value);
@@ -69,6 +51,7 @@ function listenAndStore(input) {
           `degreeid${input.id.substring(6)}`,
           input.options[input.selectedIndex].value
         );
+        setItem(inputId, value);
       } else {
         setItem("degreeid", input.options[input.selectedIndex].value);
         setItem(inputId, value);
@@ -81,20 +64,6 @@ function listenAndStore(input) {
     }
   });
 }
-
-function validateSelectDate(input) {
-  const label = document.querySelector(`label[for="${input.id}"]`);
-  if (input.value === "" || input.value === "აირჩიეთ ხარისხი") {
-    input.classList.remove("valid");
-    input.classList.add("invalid");
-    label.classList.add("invalid-label");
-  } else {
-    input.classList.remove("invalid");
-    input.classList.add("valid");
-    label.classList.remove("invalid-label");
-  }
-}
-
 listenAndStore(institute);
 listenAndStore(eduDescription);
 listenAndStore(dueDate);
@@ -105,13 +74,13 @@ function validateOnClick(inputs) {
     let value = input.value;
     let inputId = input.id;
     if (inputId.includes("Degree")) {
-      value = input.options[input.selectedIndex].text;
+      value = input.options[input.selectedIndex].innerText;
     }
     if (inputId.includes("Institute") || inputId.includes("eduDescription")) {
       validateInput(input, value);
     }
     if (inputId.includes("dueDate") || inputId.includes("Degree")) {
-      validateSelectDate(input);
+      validateSelectDate(input, value);
     }
   });
 }
@@ -139,7 +108,11 @@ function getLocalStorage() {
 
 function checkAdditionalExp(inputs) {
   inputs.forEach((input) => {
-    input.addEventListener("keyup", function () {
+    let method = "keyup";
+    if (input.id.includes("dueDate") || input.id.includes("Degree")) {
+      method = "change";
+    }
+    input.addEventListener(method, function () {
       if (input.value === "") {
         validateAdditional(false, inputs);
       } else {
@@ -149,22 +122,24 @@ function checkAdditionalExp(inputs) {
   });
 }
 
+function clearValidation(inputs) {
+  inputs.forEach((input) => {
+    const label = document.querySelector(`label[for="${input.id}"]`);
+    const iconContainer = document.getElementById(`icon-container-${input.id}`);
+    input.classList.remove("invalid");
+    label.classList.remove("invalid-label");
+    if (iconContainer) {
+      iconContainer.remove();
+    }
+  });
+}
+
 function validateAdditional(value, inputs) {
   nextBtn.addEventListener("click", function () {
     if (value === true) {
       validateOnClick(inputs);
     } else {
-      inputs.forEach((input) => {
-        const label = document.querySelector(`label[for="${input.id}"]`);
-        const iconContainer = document.getElementById(
-          `icon-container-${input.id}`
-        );
-        input.classList.remove("invalid");
-        label.classList.remove("invalid-label");
-        if (iconContainer) {
-          iconContainer.remove();
-        }
-      });
+      clearValidation(inputs);
     }
   });
 }
@@ -219,7 +194,7 @@ function getAdditionalInputsEdu() {
             const degreeDropdown = document.getElementById(key);
             for (let i = 0; i < degreeDropdown.options.length; i++) {
               if (degreeDropdown.options[i].innerText === value) {
-                degreeDropdown.selectedIndex = i; // not working
+                degreeDropdown.selectedIndex = i;
                 break;
               }
             }
@@ -241,17 +216,7 @@ function onClickValAdd() {
     if (keysToValidate.some((key) => key.value !== "")) {
       validateOnClick(keysToValidate);
     } else {
-      keysToValidate.forEach((input) => {
-        const label = document.querySelector(`label[for="${input.id}"]`);
-        const iconContainer = document.getElementById(
-          `icon-container-${input.id}`
-        );
-        input.classList.remove("invalid");
-        label.classList.remove("invalid-label");
-        if (iconContainer) {
-          iconContainer.remove();
-        }
-      });
+      clearValidation(keysToValidate);
     }
   }
 }
@@ -269,6 +234,7 @@ function deleteDefaultDegree() {
 
 nextBtn.addEventListener("click", function () {
   validateOnClick(inputs);
+  // getAdditionalInputsEdu();
   onClickValAdd();
   const invalidElements = document.querySelectorAll(".invalid");
   if (invalidElements.length === 0) {
@@ -286,6 +252,6 @@ createEdu();
 getAllOutputs();
 showDiv();
 localEmptyClear();
-showDivOnKeyUp();
+showDivOnKeyUp(inputs, "eduContainer");
 getLocalStorage();
 getAdditionalInputsEdu();

@@ -118,6 +118,25 @@ function localEmptyClear() {
   }
 }
 
+function showDivOnKeyUp(inputs, id) {
+  inputs.forEach((input) => {
+    let method = "keyup";
+    if (input.id === "startDate" || input.id === "endDate") {
+      method = "change";
+    }
+    const expContainer = document.getElementById(id);
+    input.addEventListener(method, function () {
+      if (inputs.every((input) => input.value === "")) {
+        if (!expContainer.classList.contains("hidden-div")) {
+          expContainer.classList.add("hidden-div");
+        }
+      } else {
+        expContainer.classList.remove("hidden-div");
+      }
+    });
+  });
+}
+
 export {
   setItem,
   getItem,
@@ -128,4 +147,5 @@ export {
   hideHiddenFields,
   showDiv,
   localEmptyClear,
+  showDivOnKeyUp,
 };
