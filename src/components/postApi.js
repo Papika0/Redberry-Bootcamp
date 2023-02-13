@@ -8,6 +8,18 @@ const experiences = [
   },
 ];
 
+let counterExp = 1;
+while (localStorage.getItem(`Position${counterExp}`)) {
+  experiences.push({
+    position: localStorage.getItem(`Position${counterExp}`),
+    employer: localStorage.getItem(`Company${counterExp}`),
+    start_date: localStorage.getItem(`startDate${counterExp}`),
+    due_date: localStorage.getItem(`endDate${counterExp}`),
+    description: localStorage.getItem(`expDescription${counterExp}`),
+  });
+  counterExp++;
+}
+
 const educations = [
   {
     institute: localStorage.getItem("Institute"),
@@ -17,7 +29,18 @@ const educations = [
   },
 ];
 
-function postData() {
+let counterEdu = 1;
+while (localStorage.getItem(`Institute${counterEdu}`)) {
+  educations.push({
+    institute: localStorage.getItem(`Institute${counterEdu}`),
+    degree_id: localStorage.getItem(`degreeid${counterEdu}`),
+    due_date: localStorage.getItem(`dueDate${counterEdu}`),
+    description: localStorage.getItem(`eduDescription${counterEdu}`),
+  });
+  counterEdu++;
+}
+
+async function postData() {
   const url = "https://resume.redberryinternship.ge/api/cvs";
   const formData = new FormData();
   formData.append("name", localStorage.getItem("Name"));
@@ -52,11 +75,7 @@ function postData() {
     const imageBlob = dataURLtoBlob(photo);
     formData.append("image", imageBlob, "image.jpg");
   }
-  for (let obj of formData) {
-    console.log(obj);
-  }
-
-  fetch(url, {
+  await fetch(url, {
     method: "POST",
     body: formData,
     headers: {
@@ -71,6 +90,13 @@ function postData() {
         });
       } else {
         console.log(res);
+        res.json().then((data) => {
+          console.log(data);
+          localStorage.clear();
+          localStorage.setItem("postData", JSON.stringify(data));
+          console.log(localStorage.getItem("postData"));
+          window.location.href = "../resume-page/resume.html";
+        });
       }
     })
     .catch((err) => {

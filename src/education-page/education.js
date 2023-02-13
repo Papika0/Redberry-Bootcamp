@@ -64,8 +64,17 @@ function listenAndStore(input) {
       validateSelectDate(input);
     }
     if (inputId.includes("Degree")) {
-      setItem("degreeid", input.options[input.selectedIndex].value);
-      setItem(inputId, value);
+      if (input.id.substring(6) !== "") {
+        console.log(input);
+        setItem(
+          `degreeid${input.id.substring(6)}`,
+          input.options[input.selectedIndex].value
+        );
+      } else {
+        console.log(input);
+        setItem("degreeid", input.options[input.selectedIndex].value);
+        setItem(inputId, value);
+      }
     }
     setItem(inputId, value);
     updateOutput(inputId, value);
@@ -207,12 +216,12 @@ function getAdditionalInputsEdu() {
         if (!prefixMap[keyIndex]) prefixMap[keyIndex] = [];
         prefixMap[keyIndex].push(prefix + keyIndex);
         addEdu(keyIndex);
-        const degreeDropdown = document.getElementById(key);
         fetchDegrees(keyIndex).then(() => {
           if (getItem(key) && key.includes("Degree")) {
+            const degreeDropdown = document.getElementById(key);
             for (let i = 0; i < degreeDropdown.options.length; i++) {
-              if (degreeDropdown.options[i].value === value) {
-                degreeDropdown.selectedIndex = i;
+              if (degreeDropdown.options[i].innerText === value) {
+                degreeDropdown.selectedIndex = i; // not working
                 break;
               }
             }
@@ -266,8 +275,8 @@ nextBtn.addEventListener("click", function () {
   const invalidElements = document.querySelectorAll(".invalid");
   console.log(invalidElements);
   if (invalidElements.length === 0) {
-    console.log("valid");
     postData();
+    console.log("valid");
   }
 });
 
