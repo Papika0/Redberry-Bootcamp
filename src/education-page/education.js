@@ -281,7 +281,7 @@ nextBtn.addEventListener("click", function () {
 await fetchDegrees();
 createHTML();
 createExp();
-getAdditionalInputs();
+getAdditionalInputs("exp");
 deleteDefaultDegree();
 createEdu();
 getAllOutputs();

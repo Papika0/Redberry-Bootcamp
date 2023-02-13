@@ -1,5 +1,9 @@
 import { createFormHTML } from "../components/formHtmlCteate.js";
-import { createHTML, createExp } from "../components/cvHtmlCreate.js";
+import {
+  createHTML,
+  createExp,
+  createEdu,
+} from "../components/cvHtmlCreate.js";
 import {
   getAllOutputs,
   setItem,
@@ -9,6 +13,7 @@ import {
   localEmptyClear,
 } from "../components/localStorage.js";
 import { validateInput } from "../components/validation.js";
+import { getAdditionalInputs } from "../components/getAdditional.js";
 const backBtn = document.getElementById("back-btn");
 const nextBtn = document.getElementById("next-btn");
 
@@ -160,7 +165,7 @@ function addExp(num) {
   }
 }
 
-function getAdditionalInputs() {
+function getAdditionalInput() {
   let keysToValidate = [];
   let prefixes = [
     "Position",
@@ -209,7 +214,9 @@ nextBtn.addEventListener("click", function (e) {
 window.addEventListener("load", function () {
   createHTML();
   createExp();
-  getAdditionalInputs();
+  getAdditionalInput();
+  createEdu();
+  getAdditionalInputs("edu");
   getAllOutputs();
   getLocalStorage();
   showDiv();

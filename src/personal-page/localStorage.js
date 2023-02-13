@@ -1,5 +1,9 @@
 import { name, lastName, email, phoneNumber, aboutMe } from "./validation.js";
-import { createHTML, createExp } from "../components/cvHtmlCreate.js";
+import {
+  createHTML,
+  createExp,
+  createEdu,
+} from "../components/cvHtmlCreate.js";
 import {
   setItem,
   getItem,
@@ -9,6 +13,7 @@ import {
   updateOutput,
   localEmptyClear,
 } from "../components/localStorage.js";
+import { getAdditionalInputs } from "../components/getAdditional.js";
 
 const photoInput = document.getElementById("photoInput");
 
@@ -25,39 +30,12 @@ photoInput.addEventListener("change", function () {
   reader.readAsDataURL(file);
 });
 
-function getAdditionalInputs() {
-  let prefixes = [
-    "Position",
-    "Company",
-    "expDescription",
-    "startDate",
-    "endDate",
-  ];
-  let keyIndex = 0;
-  for (let i = 0; i < localStorage.length; i++) {
-    let key = localStorage.key(i);
-    prefixes.forEach((prefix) => {
-      if (key.startsWith(prefix) && key.substring(prefix.length) !== "") {
-        let value = localStorage.getItem(key);
-        if (value !== "") {
-          keyIndex = key.substring(prefix.length);
-        } else keyIndex = 0;
-      }
-    });
-  }
-  if (keyIndex !== 0) {
-    createExp(keyIndex);
-    prefixes.forEach((prefix) => {
-      let key = prefix + keyIndex;
-      let value = localStorage.getItem(key);
-      updateOutput(key, value);
-    });
-  }
-}
-
 window.addEventListener("load", function () {
   createHTML();
   createExp();
+  getAdditionalInputs("exp");
+  createEdu();
+  getAdditionalInputs("edu");
   name.value = getItem("Name");
   lastName.value = getItem("Lastname");
   email.value = getItem("Email");
@@ -66,5 +44,4 @@ window.addEventListener("load", function () {
   getAllOutputs();
   showDiv();
   localEmptyClear();
-  getAdditionalInputs();
 });
