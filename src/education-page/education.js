@@ -65,13 +65,11 @@ function listenAndStore(input) {
     }
     if (inputId.includes("Degree")) {
       if (input.id.substring(6) !== "") {
-        console.log(input);
         setItem(
           `degreeid${input.id.substring(6)}`,
           input.options[input.selectedIndex].value
         );
       } else {
-        console.log(input);
         setItem("degreeid", input.options[input.selectedIndex].value);
         setItem(inputId, value);
       }

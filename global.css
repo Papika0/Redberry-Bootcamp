@@ -324,3 +324,14 @@ p {
   gap: 25px;
   margin: 0 auto 0;
 }
+
+.experience-container {
+  width: 90%;
+  word-wrap: break-word;
+}
+
+.position-company,
+.date-div {
+  line-break: anywhere;
+  width: 90%;
+}
