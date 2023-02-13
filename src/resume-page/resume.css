@@ -1,0 +1,44 @@
+.resume {
+  margin: 3.37rem 34rem 8rem;
+  border: 0.8px solid #000000;
+}
+
+.resume-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 5rem;
+
+  margin-bottom: 8rem;
+}
+
+#email-icon,
+#phone-icon {
+  visibility: visible;
+}
+
+.displayedImage {
+  visibility: visible;
+  margin-left: 28rem;
+  margin-top: 7rem;
+}
+
+.splitter {
+  width: 100%;
+}
+
+.about-me-div {
+  width: 60%;
+}
+
+.exp-output {
+  width: 100%;
+}
+
+.redberry-last-icon {
+  margin-left: 5rem;
+  margin-bottom: 2.75rem;
+}
+
+.back-arrow {
+  background: #f9f9f9;
+}
