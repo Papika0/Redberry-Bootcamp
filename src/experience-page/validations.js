@@ -55,11 +55,19 @@ validateAndStore(company);
 validateAndStore(expDescription);
 
 function storeLocal(input) {
+  const label = document.querySelector(`label[for="${input.id}"]`);
   input.addEventListener("change", function () {
     setItem(input.id, input.value);
     updateOutput(input.id, input.value);
     if (input.value === "") {
       localStorage.removeItem(input.id);
+      input.classList.remove("valid");
+      input.classList.add("invalid");
+      label.classList.add("invalid-label");
+    } else {
+      input.classList.remove("invalid");
+      input.classList.add("valid");
+      label.classList.remove("invalid-label");
     }
   });
 }
